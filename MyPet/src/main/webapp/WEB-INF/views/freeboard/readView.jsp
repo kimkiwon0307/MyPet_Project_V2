@@ -23,36 +23,38 @@
 	<div class="container">
 		<div class="sub_menu">
 			<div class = "subject_h1" >
-				<h1>글쓰기 </h1>
+				<h1>조 회 </h1>
 			</div>
 			<div class = "subject_h5">
-				<h5>홈 > 자유게시판 > 글쓰기</h5>
+				<h5>홈 > 자유게시판 > 조회하기</h5>
 			</div>
 			
 		</div>
 		
-		<form action="/controller/freeboard/write" method="post" >
+		<form action="/" method="post" >
 				
 			<div class="input_group_a">
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">이 름</span> 
-					<input type="text" class="form-control" placeholder="Username" name="fwriter"/>
+					<input type="text" class="form-control" placeholder="Username"
+					 name="fwriter" value="${read.fwriter}" readonly="readonly"/>
 				</div>
 			
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">제 목</span> 
 					<input type="text" class="form-control" placeholder="제목을 작성하세요." 
-					name="ftitle" aria-label="Username" aria-describedby="basic-addon1">
+					name="ftitle" aria-label="Username" aria-describedby="basic-addon1"
+					value="${read.ftitle}" readonly="readonly">
 				</div>
 			
 			
 				<div class="input-group">
 					<span class="input-group-text">내 용</span>
-  					<textarea class="form-control" aria-label="With textarea" name="fcontent"></textarea>
+  					<textarea class="form-control" aria-label="With textarea" name="fcontent" readonly="readonly"><c:out value="${read.fcontent}" /></textarea>
 				</div>
 				
 				<div class="btn_group">
-					<button type="submit" class="btn btn-primary" id="btn_write">작 성</button>
+					<button type="submit" class="btn btn-primary" id="btn_write">수 정</button>
 					<button type="button" class="btn btn-danger" id="btn_list">목 록</button>
 				</div>
 			</div>

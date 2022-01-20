@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+/* */
+
+
+
+
+.container{
+	
+}
+.container a{
+		text-decoration: none;	
+		color:black;
+}
+
+.container .sub_menu{
+	
+	display: flex;
+	position:relative;
+	border-bottom-style : solid;
+	
+}
+
+.container .sub_menu .subject_h5{
+	
+	position:absolute;
+	top : 0;
+ 	height : 10px; 
+	bottom : 0;
+	margin : auto;
+	right : 0;
+}
+
+
+.container .table{
+	
+	text-align:center;	
+}
+
+.container .btn_group{
+}
+
+.container .btn_group {
+	
+	text-align:right;
+}
+
+.bottom{
+	
+	height : 300px;
+}
+
+header{
+	height : 300px;
+}
+
+
