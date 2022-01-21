@@ -11,12 +11,46 @@
 		values (mp_free_seq.nextval, #{ftitle}, #{fcontent}, #{fwriter})
 	</insert>
 
-	<!-- 목록 가져오기 -->
+	<!-- 목록 가져오기 
 	<select id="list" resultType="com.fe.vo.FreeBoardVO">
-
 		select * from mp_freeboard order by fno desc
-
 	</select>
+	-->
+	
+<!-- 목록 (페이징) 
+
+	
+	<select id="listPage" resultType="com.fe.vo.FreeBoardVO" parameterType="com.fe.vo.Criteria">
+		select fno,ftitle,fcontent,fwriter, regdate
+		from (
+			select fno,ftitle,fcontent,fwriter, regdate, row_number() OVER(order by fno desc) as rnum
+			from mp_freeboard 
+			) mp
+		
+		where rnum between #{rowStart} and #{rowEnd}
+		ORDER BY fno desc		
+		
+	</select> 
+
+-->
+	
+	<!--목록(페이징,검색) 
+	-->
+	
+	<select id="listPage" resultType="com.fe.vo.FreeBoardVO" parameterType="com.fe.vo.SearchCriteria">
+		select fno, ftitle, fcontent, fwriter, regdate 
+		from ( 
+				select fno, ftitle, fcontent, fwriter, regdate, row_number() OVER(ORDER BY fno desc) as rnum
+				from mp_freeboard
+				where 1=1
+				 <include refid="search"></include>
+				 ) mp
+		where rnum between #{rowStart} and #{rowEnd}
+		ORDER BY fno desc
+		
+	</select>
+	
+	
 
 	<!-- 조회하기 -->
 	<select id="read" parameterType="int" resultType="com.fe.vo.FreeBoardVO">
@@ -44,8 +78,37 @@
 		where fno = #{fno}
 		
 	</delete>
+	
+	<!-- 게시글 총 갯수 
+	<select id="listCount" resultType="int">
+		<![CDATA[
+			select count(fno)
+			from mp_freeboard
+			where fno > 0
+		]]>
+	</select>
+	 -->
 
-
+	<!-- 게시글 총 갯수 (검색) 
+	-->
+	<select id="listCount" parameterType="com.fe.vo.SearchCriteria" resultType="int">
+		select count(fno) 
+		from mp_freeboard
+		where 1=1
+		<include refid="search"></include>
+			AND fno >0
+	</select>
+	
+	<!-- 동적쿼리  -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">and ftitle LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND fcontent LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND fwriter LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tc'.toString()">AND (ftitle LIKE '%' || #{keyword} || '%') or (fcontent LIKE '%' || #{keyword} || '%')</if>
+		</if>
+	</sql>
+	
 
 
 

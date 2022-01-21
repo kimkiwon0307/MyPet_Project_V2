@@ -36,21 +36,22 @@
 			<div class="input_group_a">
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">이 름</span> 
-					<input type="text" class="form-control" placeholder="Username" name="fwriter"/>
+					<input type="text" class="form-control" placeholder="Username" name="fwriter" required/>
 				</div>
 			
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">제 목</span> 
 					<input type="text" class="form-control" placeholder="제목을 작성하세요." 
-					name="ftitle" aria-label="Username" aria-describedby="basic-addon1">
+					name="ftitle" aria-label="Username" aria-describedby="basic-addon1" required>
 				</div>
 			
 			
 				<div class="input-group">
 					<span class="input-group-text">내 용</span>
-  					<textarea class="form-control" aria-label="With textarea" name="fcontent"></textarea>
+  					<textarea class="form-control" aria-label="With textarea" name="fcontent" required></textarea>
 				</div>
-				
+
+
 				<div class="btn_group">
 					<button type="submit" class="btn btn-primary" id="btn_write">작 성</button>
 					<button type="button" class="btn btn-danger" id="btn_list">목 록</button>

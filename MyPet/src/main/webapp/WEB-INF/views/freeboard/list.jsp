@@ -25,10 +25,10 @@
 	<div class="container">
 		<div class="sub_menu">
 			<div class = "subject_h1" >
-				<h1>목록 </h1>
+				<h1>목 록 </h1>
 			</div>
 			<div class = "subject_h5">
-				<h5>홈 > 자유게시판 > 목록</h5>
+				<h5>홈 > 자유게시판 > 목 록</h5>
 			</div>
 			
 		</div>
@@ -48,13 +48,68 @@
 						<th scope="row"><c:out value="${list.fno}" /></th>
 						<td><a href="/controller/freeboard/readView?fno=${list.fno}"><c:out value="${list.ftitle}" /></a></td>
 						<td><c:out value="${list.fwriter}" /></td>
-						<td><fmt:formatDate value="${list.regdate}"
-								pattern="yyyy-MM-dd" /></td>
+						<td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 
+		<div class="search">
+			<select name="searchType">
+				<option value="n"
+					<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
+				<option value="t"
+					<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
+				<option value="c"
+					<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+				<option value="w"
+					<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
+				<option value="tc"
+					<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+			</select> <input type="text" name="keyword" id="keywordInput"
+				value="${scri.keyword}" />
+
+			<button id="searchBtn" type="button">검색</button>
+			<script>
+				$(function() {
+					$('#searchBtn').click(
+							function() {
+								self.location = "list"
+										+ '${pm.makeQuery(1)}'
+										+ "&searchType="
+										+ $("select option:selected").val()
+										+ "&keyword="
+										+ encodeURIComponent($('#keywordInput')
+												.val());
+							});
+				});
+			</script>
+		</div>
+
+
+		<!--  페이징 -->
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<c:if test="${pm.prev}">
+					<li class="page-item">
+						<a class="page-link" href="list${pm.makeQuery(pm.startPage - 1)}">이전</a>
+					</li>
+				</c:if>
+
+				<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="idx">
+					<li class="page-item">
+						<a class="page-link" href="list${pm.makeQuery(idx)}">${idx}</a>
+					</li>
+				</c:forEach>
+
+				<c:if test="${pm.next && pm.endPage > 0}">
+					<li class="page-item">
+						<a class="page-link" href="list${pm.makeQuery(pm.endPage + 1)}">다음</a>
+					</li>
+				</c:if>
+			</ul>
+		</nav>
+	
 		<div class="btn_group">
 			<button type="button" class="btn btn-primary" id="btn_write">작 성</button>
 		</div>
@@ -73,10 +128,6 @@
 		$("#btn_write").on("click",function(){
 			location.href="/controller/freeboard/writeView";
 		})
-		
-		
-		
-		
 	})
 	</script>
 
