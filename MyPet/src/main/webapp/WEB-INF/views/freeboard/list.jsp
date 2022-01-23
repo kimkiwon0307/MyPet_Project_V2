@@ -53,8 +53,8 @@
 				</c:forEach>
 			</tbody>
 		</table>
-
-		<div class="search">
+	    <div id="sebupa">
+		 <div class="search">
 			<select name="searchType">
 				<option value="n"
 					<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
@@ -69,7 +69,7 @@
 			</select> <input type="text" name="keyword" id="keywordInput"
 				value="${scri.keyword}" />
 
-			<button id="searchBtn" type="button">검색</button>
+			<button id="searchBtn" class="btn btn-primary" type="button">검색</button>
 			<script>
 				$(function() {
 					$('#searchBtn').click(
@@ -79,8 +79,7 @@
 										+ "&searchType="
 										+ $("select option:selected").val()
 										+ "&keyword="
-										+ encodeURIComponent($('#keywordInput')
-												.val());
+										+ encodeURIComponent($('#keywordInput').val());
 							});
 				});
 			</script>
@@ -114,6 +113,7 @@
 			<button type="button" class="btn btn-primary" id="btn_write">작 성</button>
 		</div>
 
+	  </div>
 	</div>
 
 	<div class="bottom">

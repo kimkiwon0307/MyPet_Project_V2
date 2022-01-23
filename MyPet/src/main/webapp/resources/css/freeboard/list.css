@@ -4,10 +4,17 @@
 
 
 
-
 .container{
 	
 }
+
+.container .sebupa{
+	
+	background-color: red;
+}
+
+
+
 .container a{
 		text-decoration: none;	
 		color:black;
@@ -37,13 +44,17 @@
 	text-align:center;	
 }
 
-.container .btn_group{
-}
 
 .container .btn_group {
-	
-	text-align:right;
+
+	position: absolute;
+	top: 0;
+	right: 0;
 }
+
+
+
+
 
 .bottom{
 	
