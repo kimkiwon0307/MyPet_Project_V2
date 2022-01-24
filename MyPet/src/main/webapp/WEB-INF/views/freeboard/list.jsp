@@ -25,10 +25,10 @@
 	<div class="container">
 		<div class="sub_menu">
 			<div class = "subject_h1" >
-				<h1>목 록 </h1>
+				<h1>목록 </h1>
 			</div>
 			<div class = "subject_h5">
-				<h5>홈 > 자유게시판 > 목 록</h5>
+				<h5>홈 > 자유게시판 > 목록</h5>
 			</div>
 			
 		</div>
@@ -53,7 +53,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	    <div id="sebupa">
+	    <div class="sebupa">
 		 <div class="search">
 			<select name="searchType">
 				<option value="n"

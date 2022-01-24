@@ -10,7 +10,8 @@
 
 .container .sebupa{
 	
-	background-color: red;
+	display : felx;
+	position: relative;
 }
 
 
@@ -45,14 +46,12 @@
 }
 
 
-.container .btn_group {
+.container .sebupa .btn_group {
 
 	position: absolute;
-	top: 0;
 	right: 0;
+	
 }
-
-
 
 
 
