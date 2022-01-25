@@ -87,7 +87,7 @@
 
 
 		<!--  페이징 -->
-		<nav aria-label="Page navigation example">
+		<nav aria-label="Page navigation example" class="pageNa">
 			<ul class="pagination">
 				<c:if test="${pm.prev}">
 					<li class="page-item">

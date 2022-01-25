@@ -10,10 +10,15 @@
 
 .container .sebupa{
 	
-	display : felx;
+	display : flex;
 	position: relative;
 }
 
+.container .sebupa .pageNa{
+
+	margin-left: 160px;
+	
+}
 
 
 .container a{
@@ -28,6 +33,8 @@
 	border-bottom-style : solid;
 	
 }
+
+
 
 .container .sub_menu .subject_h5{
 	
