@@ -38,6 +38,52 @@ public class AlbumBoardController {
 		
 		return "redirect:/albumboard/list";
 	}
+	
+	@GetMapping("/list")
+	public String list(Model model) throws Exception{
+		
+		model.addAttribute("list", service.list());
+		
+		
+		
+		return "albumboard/list";
+		
+	}
+	
+	// 게시판 수정뷰
+	@GetMapping("/updateView")
+	public String updateView(AlbumBoardVO vo, Model model) throws Exception{
+		
+		model.addAttribute("update", service.read(vo.getAno()));
+		
+		return "album/updateView";
+	}
+	
+	// 게시판 수정
+	@PostMapping("/update")
+	public String update(AlbumBoardVO vo) throws Exception{
+		
+		service.update(vo);
+		
+		return "redirect:/albumboard/list";
+	}
+
+	// 게시판 삭제
+	@PostMapping("/delete")
+	public String delete(AlbumBoardVO vo) throws Exception{
+		
+		service.delete(vo.getAno());
+		
+		return "redirect:/albumboard/list";
+	}
+	
+	@GetMapping("/readView")
+	public String read(AlbumBoardVO vo, Model model) throws Exception{
+		
+		model.addAttribute("read", service.read(vo.getAno()));
+		
+		return "albumboard/readView";
+	}
 
 	
 }

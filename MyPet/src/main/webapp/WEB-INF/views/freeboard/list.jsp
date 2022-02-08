@@ -25,7 +25,7 @@
 	<div class="container">
 		<div class="sub_menu">
 			<div class = "subject_h1" >
-				<h1>목록 </h1>
+				<h1>목 록 </h1>
 			</div>
 			<div class = "subject_h5">
 				<h5>홈 > 자유게시판 > 목록</h5>
@@ -66,8 +66,8 @@
 					<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
 				<option value="tc"
 					<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
-			</select> <input type="text" name="keyword" id="keywordInput"
-				value="${scri.keyword}" />
+			</select> 
+			<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}" />
 
 			<button id="searchBtn" class="btn btn-primary" type="button">검색</button>
 			<script>
@@ -121,7 +121,6 @@
 
 	<script>
 	
-		
 	$(document).ready(function(){
 	
 		// 글쓰기 버튼 누르면 글쓰기 화면으로 이동

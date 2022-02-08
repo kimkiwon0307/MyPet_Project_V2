@@ -8,9 +8,35 @@
 	<insert id="insert">
 		insert into mp_album(ano, acontent) values(mp_album_seq.nextval, #{acontent})
 	</insert>
-
-
-
+	
+	<select id="list" resultType="com.fe.vo.AlbumBoardVO">
+		
+		select ano, acontent, regdate
+		from mp_album 
+		order by ano desc
+		
+	</select>	
+	
+	<select id="read" parameterType="int" resultType="com.fe.vo.AlbumBoardVO">
+		select	ano, acontent
+		 from mp_album
+		 where ano = #{ano}
+	</select>
+	
+	
+	
+	
+	 <update id="update" parameterType="com.fe.vo.AlbumBoardVO">
+		UPDATE mp_album 
+		   SET acontent    =   #{acontent}
+		 WHERE ano = #{ano} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE 
+		  FROM mp_album
+		 WHERE ano = #{ano}
+	</delete>
 
 
 </mapper>
