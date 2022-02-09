@@ -23,44 +23,36 @@
 	<div class="container">
 		<div class="sub_menu">
 			<div class = "subject_h1" >
-				<h1>수 정 </h1>
+				<h1>조 회 </h1>
 			</div>
 			<div class = "subject_h5">
-				<h5>홈 > 자유게시판 > 수 정</h5>
+				<h5>홈 > 앨범게시판 > 수정하기</h5>
 			</div>
 			
 		</div>
 		
-		<form action="/controller/freeboard/update" method="post" >
-				
+		<form action="/controller/albumboard/update" method="post" >
 			<div class="input_group_a">
-			
-				<div class="input-group mb-3">
-					<span class="input-group-text" id="basic-addon1">번 호</span> 
-					<input type="text" class="form-control" name="fno" value="${update.fno}" readonly="readonly"/>
-				</div>
-			
-			
-				<div class="input-group mb-3">
-					<span class="input-group-text" id="basic-addon1">제 목</span> 
-					<input type="text" class="form-control" placeholder="제목을 수정하세요." 
-					name="ftitle" aria-label="Username" aria-describedby="basic-addon1" required>
-				</div>
-			
+				<input type="hidden" id="ano" name="ano" value="${update.ano}" />		
 			
 				<div class="input-group">
-					<span class="input-group-text">내 용</span>
-  					<textarea class="form-control" aria-label="With textarea" name="fcontent"
-  					 placeholder="내용을 수정하세요." required></textarea>
+					<span class="input-group-text">사 진</span>
+  					<textarea class="form-control" aria-label="With textarea"  readonly="readonly"> 
+  						<img src="https://cdn.pixabay.com/photo/2018/05/17/06/22/dog-3407906__480.jpg"/>
+  					</textarea>
 				</div>
-				
+		
+				<div class="input-group mb-3">
+					<span class="input-group-text" id="basic-addon1">내 용</span> 
+					<input type="text" class="form-control" name="acontent" value='<c:out value="${update.acontent}"></c:out>'/>
+				</div>
+
 				<div class="btn_group">
-					<button type="submit" class="btn btn-primary" id="btn_update">수 정</button>
-					<button type="button" class="btn btn-danger" id="btn_cancle">취 소</button>
+					<button type="submit" class="btn btn-primary" id="btn_write">수 정</button>
+					<button type="button" class="btn btn-danger" id="btn_list">취 소</button>
 				</div>
 			</div>
 		</form>
-			
 	</div>
 
 	<div class="bottom">
@@ -68,12 +60,10 @@
 
 	<script>
 		$(document).ready(function(){
-			
 			// 목록 버튼 누르면 목록으로 가기
-			$("#btn_cancle").on("click",function(){
-				location.href="/controller/freeboard/list"
+			$("#btn_list").on("click",function(){
+				location.href="/controller/albumboard/list"
 			})
-			
 		})
 	
 	</script>

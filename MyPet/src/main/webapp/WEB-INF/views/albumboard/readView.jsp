@@ -36,6 +36,13 @@
 		</form>
 		
 			<div class="input_group_a">
+				
+				<div class="input-group">
+					<span class="input-group-text">사 진</span>
+  					<textarea class="form-control" aria-label="With textarea"  readonly="readonly"> <img src="https://cdn.pixabay.com/photo/2018/05/17/06/22/dog-3407906__480.jpg"/></textarea>
+				</div>
+				
+		
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">내 용</span> 
 					<input type="text" class="form-control" name="acontent" value="${read.acontent}" readonly="readonly"/>
@@ -58,13 +65,10 @@
 			
 			const readForm = $("#readForm");
 			
-			
-			
 			// 목록 버튼 누르면 목록으로 가기
 			$("#btn_list").on("click",function(){
 				location.href="/controller/albumboard/list"
 			})
-			
 			
 			// 수정 버튼을 누르면 writeView로 이동
 			$("#btn_update").on("click",function(){
@@ -72,8 +76,8 @@
 				readForm.attr("action", "/controller/albumboard/updateView");
 				readForm.attr("method", "get");
 				readForm.submit();
-				
 			})
+			
 			
 			// 삭제 버튼을 누르면 게시글 삭제
 			$("#btn_delete").on("click",function(){
@@ -87,7 +91,6 @@
 				readForm.attr("method","post");
 				readForm.submit();
 				}
-				
 			})
 			
 		})

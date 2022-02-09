@@ -27,9 +27,9 @@
 	
 	
 	 <update id="update" parameterType="com.fe.vo.AlbumBoardVO">
-		UPDATE mp_album 
-		   SET acontent    =   #{acontent}
-		 WHERE ano = #{ano} 
+		update mp_album 
+		   set acontent = #{acontent}
+		 where ano = #{ano} 
 	</update>
 	
 	<delete id="delete" parameterType="int">

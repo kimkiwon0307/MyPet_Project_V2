@@ -19,6 +19,11 @@
 
 	<link href="${path}/resources/css/albumboard/list.css"rel="stylesheet" >
 
+<!-- jquery CDN -->	
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>		
+<!-- 절대경로 -->
+<link href="${path}/resources/css/freeboard/list.css"rel="stylesheet" >
+
 
     <!-- Bootstrap core CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -70,10 +75,26 @@
     
       </div>
     </div>
+    	<div class="btn_group">
+			<button type="button" class="btn btn-primary" id="btn_write">작 성</button>
+		</div>
+    
   </div>
       
       <footer>
       
       </footer>
+      <script>
+	
+	$(document).ready(function(){
+	
+		// 글쓰기 버튼 누르면 글쓰기 화면으로 이동
+		$("#btn_write").on("click",function(){
+			location.href="/controller/albumboard/writeView";
+		})
+	})
+	</script>
+      
+      
   </body>
 </html>

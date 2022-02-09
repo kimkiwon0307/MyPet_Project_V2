@@ -56,12 +56,14 @@ public class AlbumBoardController {
 		
 		model.addAttribute("update", service.read(vo.getAno()));
 		
-		return "album/updateView";
+		return "albumboard/updateView";
 	}
 	
 	// 게시판 수정
 	@PostMapping("/update")
 	public String update(AlbumBoardVO vo) throws Exception{
+		
+		System.out.println(vo.toString()+"hi");
 		
 		service.update(vo);
 		
