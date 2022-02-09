@@ -16,9 +16,8 @@
     <!-- 로그인 -->
 	<select id="login" resultType="com.fe.vo.MemberVO">
 		SELECT USERID, USERPASS, USERNAME
-	  FROM MP_MEMBER
-	 WHERE USERID = #{userId}
-	   AND USERPASS = #{userPass}     
+	    FROM MP_MEMBER
+	    WHERE USERID = #{userId} AND USERPASS = #{userPass}     
 	</select>
 	
 	<!-- 회원정보 수정 -->

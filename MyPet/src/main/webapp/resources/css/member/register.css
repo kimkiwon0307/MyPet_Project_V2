@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+@charset "UTF-8";
+
+.body{
+	
+	
+}
+
+
+.container{
+	
+}
+
+.container .sub_menu{
+	display: flex;
+	position : relative;
+	border-bottom-style : solid;
+}
+
+.container .sub_menu .subject_h1{
+	
+}
+
+
+.container .sub_menu .subject_h5{
+	position:absolute;
+	top : 0;
+ 	height : 10px; 
+	bottom : 0;
+	margin : auto;
+	right : 0;
+}
+
+.container .input_group_a{
+	margin-top : 10px;
+			
+}
+
+.container .input_group_a .input-group textarea{
+	
+	height:450px;
+}
+
+.container .input_group_a .btn_group{
+		
+   text-align:right;
+   margin-top : 10px;
+   
+	}
+
+.bottom{
+	
+	height : 300px;
+}
+
+header{
+	height : 300px;
+}
+
+#btn_set{
+	
+	text-align: center;
+	
+}
+
+
+
+
+

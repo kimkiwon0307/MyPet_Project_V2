@@ -31,17 +31,24 @@ public class MemberController {
 	@PostMapping("/register")
 	public String postRegister(MemberVO vo) throws Exception {
 		
+		System.out.println(vo.toString());
 		service.register(vo);
 		
-		return null;
+		return "redirect:/";
 	}
 	
 	
 	@PostMapping("/login")
 	public String login(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception{
 		
+		System.out.println(vo.toString());
+		
 		HttpSession session = req.getSession();
+	
 		MemberVO login = service.login(vo);
+		
+		System.out.println(session.toString());
+		
 		
 		if(login == null) {
 			session.setAttribute("member", null);
@@ -103,12 +110,4 @@ public class MemberController {
 			session.invalidate();
 			return "redirect:/";
 		}
-	
-	
-	
-	
-	
-	
-	
-	
 }

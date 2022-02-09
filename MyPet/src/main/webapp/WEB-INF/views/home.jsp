@@ -1,62 +1,62 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>My Pet</title>
 
-<html>
-<head>
-	<title>Home</title>
-		<!-- 합쳐지고 최소화된 최신 CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<!-- 부가적인 테마 -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- 
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+    <!-- jquery CDN -->	
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>		
+    
+	<!-- 절대경로 -->
+	<link href="${path}/resources/css/home/index.css"rel="stylesheet" >
+
+	<!-- 부트스트랩 CDN -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </head>
-<a href="/board/list">게시판</a><br />
-<script type="text/javascript">
+ 
+  <body class="text-center">
+    
+<main class="form-signin">
+  <form name='homeForm' method="post" action="/controller/member/login">
+    <img class="mb-4" src="${path}/resources/images/home/logo.png" alt="" width="230" height="170">
+    <div class="form-floating">
+      <input type="text" class="form-control" name="userId" id="userId" placeholder="name@example.com" required>
+      <label for="floatingInput">아이디를 입력해주세요.</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" name="userPass" id="userPass" placeholder="Password" required>
+      <label for="floatingPassword">비밀번호를 입력해주세요</label>
+    </div>
+    
+    <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+    <button class="w-100 btn btn-lg btn-danger" type="button" id="register_btn">회원가입</button>
+    
+    <p class="mt-5 mb-3 text-muted">&copy; 2011-2022</p>
+    
+  </form>
+</main>
+  </body>
+  
+  <script>
 	$(document).ready(function(){
-		$("#logoutBtn").on("click", function(){
-			location.href="/controller/member/logout";
-		})
-		$("#registerBtn").on("click", function(){
+		
+		
+		$("#register_btn").on("click", function(){
 			location.href="/controller/member/register";
 		})
 		
 		
-		
-		$("#memberUpdateBtn").on("click", function(){
-			location.href="/controller/member/memberUpdateView";
-		})
-		
 	})
 </script>
-<body>
-	<form name='homeForm' method="post" action="/controller/member/login">
-		<c:if test="${member == null}">
-			<div>
-				<label for="userId"></label>
-				<input type="text" id="userId" name="userId">
-			</div>
-			<div>
-				<label for="userPass"></label>
-				<input type="password" id="userPass" name="userPass">
-			</div>
-			<div>
-				<button type="submit">로그인</button>
-				<button id="registerBtn" type="button">회원가입</button>
-			</div>
-		</c:if>
-		<c:if test="${member != null }">
-			<div>
-				<p>${member.userId}님 환영 합니다.</p>
-				<button id="memberUpdateBtn" type="button">회원정보수정</button>
-				<button id="logoutBtn" type="button">로그아웃</button>
-			</div>
-		</c:if>
-		<c:if test="${msg == false}">
-			<p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
-		</c:if>
-	</form>
-</body>
+  
 </html>
