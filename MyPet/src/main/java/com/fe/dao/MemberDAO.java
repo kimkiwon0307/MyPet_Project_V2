@@ -1,5 +1,6 @@
 package com.fe.dao;
 
+import com.fe.vo.FreeBoardVO;
 import com.fe.vo.MemberVO;
 
 
@@ -13,4 +14,9 @@ public interface MemberDAO {
 	
 	public void memberDelete(MemberVO vo)throws Exception;
 	
+	public MemberVO read(MemberVO vo) throws Exception;
+	
+	public int passChk(MemberVO vo) throws Exception;
+	
+	public int idChk(MemberVO vo) throws Exception;
 }

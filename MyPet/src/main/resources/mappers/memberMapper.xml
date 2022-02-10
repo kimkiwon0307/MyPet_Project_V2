@@ -34,6 +34,25 @@
 	WHERE USERID = #{userId}
 	  AND USERPASS = #{userPass} 
 </delete>
+
+	
+	<select id="read"  resultType="com.fe.vo.MemberVO">
+		select userPass
+		 from mp_member
+		 where userId = #{userId}
+	</select>
+	
+	<!-- 패스워드 체크 -->
+<select id="passChk" resultType="int">
+	select count(*) from mp_member
+	where userId = #{userId}
+	  and userPass = #{userPass}
+</select>
+
+<select id="idChk" resultType="int">
+	SELECT COUNT(*) FROM MP_MEMBER
+	WHERE USERID = #{userId}
+</select>
    
 </mapper>
 	

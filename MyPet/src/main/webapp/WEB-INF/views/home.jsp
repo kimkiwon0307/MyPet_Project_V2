@@ -49,9 +49,11 @@
        		</a>
        	</c:if>
     
-    <p class="mt-5 mb-3 text-muted">&copy; 2011-2022</p>
-    
+    <p class="mt-5 mb-3 text-muted">&copy; 2021-2022</p>
   </form>
+<c:if test="${msg == false}">
+			비밀번호가 일치하지 않습니다.
+</c:if>
 </main>
   </body>
   

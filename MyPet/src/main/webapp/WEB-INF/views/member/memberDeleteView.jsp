@@ -9,7 +9,8 @@
 <meta charset="UTF-8">
 
 <!-- jquery CDN -->	
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>		
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
 <!-- 절대경로 -->
  <link href="${path}/resources/css/member/register.css"rel="stylesheet" >
 <!-- 부트스트랩 CDN -->
@@ -32,7 +33,7 @@
 			</div>
 			
 		</div>
-			<form action="/controller/member/memberDelete" method="post">
+			<form action="/controller/member/memberDelete" method="post" id="delForm">
 				<div class="form-group has-feedback">
 					<label class="control-label" for="userId">아이디</label>
 					<input class="form-control" type="text" id="userId" name="userId" value="${member.userId}" readonly="readonly"/>
@@ -46,7 +47,7 @@
 					<input class="form-control" type="text" id="userName" name="userName" value="${member.userName}" readonly="readonly"/>
 				</div>
 				<div class="form-group has-feedback" style="float: right; margin-top: 10px;">
-					<button class="btn btn-success" type="submit" id="submit">회원탈퇴</button>
+					<button class="btn btn-success" type="button" id="delete_btn">회원탈퇴</button>
 					<button class="cencle btn btn-danger" type="button">취소</button>
 				</div>
 			</form>
@@ -68,10 +69,31 @@
 						    
 			})
 		
+			$("#delete_btn").on("click",function(){
+		
 			
+			$.ajax({
+				url : "/controller/member/passChk",
+				type : "POST",
+				dataType : "json",
+				data : $("#delForm").serializeArray(),
+				success: function(data){
+					
+					if(data==0){
+						alert("패스워드가 틀렸습니다.");
+						return;
+					}else{
+						if(confirm("회원탈퇴하시겠습니까?")){
+							$("#delForm").submit();
+						}
+						
+					}
+				}
+			})
 			
-				
+		});
+		
+	})
 			
-		})
 	</script>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fe.service.MemberService;
@@ -31,8 +32,18 @@ public class MemberController {
 	@PostMapping("/register")
 	public String postRegister(MemberVO vo) throws Exception {
 		
-		service.register(vo);
-		
+		int result = service.idChk(vo);
+		try {
+			if(result == 1) {
+				return "controller/member/register";
+			}else if(result == 0) {
+				service.register(vo);
+			}
+			// 요기에서~ 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기 
+			// 존재하지 않는다면 -> register
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
 		return "redirect:/";
 	}
 	
@@ -40,16 +51,20 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception{
 		
-		
-		HttpSession session = req.getSession();
-	
+		MemberVO realPass = service.read(vo);
 		MemberVO login = service.login(vo);
+		HttpSession session = req.getSession();
 		
-		if(login == null) {
-			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg", false);
-		}else {
+		//입력한 비밀번호와 저장된 비밀번호 비교
+		
+		if(vo.getUserPass().equals(realPass.getUserPass()))  {
+			System.out.println("hihi");
 			session.setAttribute("member", login);
+		}else if(vo.getUserPass()!= realPass.getUserPass()){
+			
+			System.out.println("hihi22");
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:/";
 		}
 		
 		return "redirect:/freeboard/list";
@@ -81,22 +96,16 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	
-	// 회원 탈퇴 get
 		@GetMapping("/memberDeleteView")
 		public String memberDeleteView() throws Exception{
 			return "member/memberDeleteView";
 		}
 		
-		// 회원 탈퇴 post
 		@PostMapping("/memberDelete")
 		public String memberDelete(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 			
-			// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
 			MemberVO member = (MemberVO) session.getAttribute("member");
-			// 세션에있는 비밀번호
 			String sessionPass = member.getUserPass();
-			// vo로 들어오는 비밀번호
 			String voPass = vo.getUserPass();
 			
 			if(!(sessionPass.equals(voPass))) {
@@ -104,11 +113,22 @@ public class MemberController {
 				return "redirect:/member/memberDeleteView";
 			}
 			
-			System.out.println("비번맞음");
 			service.memberDelete(vo);
-			System.out.println("비번맞음2");
 			session.invalidate();
-			System.out.println("비번맞음3");
 			return "redirect:/";
+		}
+		
+		@ResponseBody
+		@PostMapping("/passChk")
+		public int passChk(MemberVO vo) throws Exception {
+			
+			System.out.println("hihi탈퇴");
+			return service.passChk(vo);
+		}	
+		
+		@ResponseBody
+		@PostMapping("/idChk")
+		public int idChk(MemberVO vo) throws Exception {
+			return service.idChk(vo);
 		}
 }

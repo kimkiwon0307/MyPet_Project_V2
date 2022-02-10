@@ -8,8 +8,9 @@
 <head>
 <meta charset="UTF-8">
 
+
 <!-- jquery CDN -->	
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>		
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <!-- 절대경로 -->
  <link href="${path}/resources/css/member/register.css"rel="stylesheet" >
 <!-- 부트스트랩 CDN -->
@@ -32,11 +33,12 @@
 			
 		</div>
 	
-		<form action="/controller/member/register" method="post">
+		<form action="/controller/member/register" method="post" id="regForm">
 			<div class="input_group_a">
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">아이디</span> 
-					<input type="text" class="form-control" placeholder="아이디를 작성하세요." name="userId" required/>
+					<input type="text" class="form-control" placeholder="아이디를 작성하세요." id="userId" name="userId" required/>
+					<button class="idChk" type="button" id="idChk" value="N">중복확인</button>
 				</div>
 			
 				<div class="input-group mb-3">
@@ -54,7 +56,6 @@
 					<button class="btn btn-success" type="submit" id="submit">회원가입</button>
 					<button class="cencle btn btn-danger" type="button">로그인</button>
 				</div>
-				
 			</div>
 	      </form>
 		</div>
@@ -67,6 +68,37 @@
 				location.href = "/controller";
 			})
 			
-		})
+			$("#submit").on("click",function(){
+				var idChkVal = $("#idChk").val();
+		
+				
+				if(idChkVal == "N"){
+					alert("중복확인 버튼을 눌러주세요.");
+					return false;
+				}else if(idChkVal == "Y"){
+					
+					$("#regForm").submit();
+					
+				}
+				
+			});
+			
+			$("#idChk").on("click",function(){
+				$.ajax({
+					url : "/controller/member/idChk",
+					type : "post",
+					dataType : "json",
+					data : {"userId" : $("#userId").val()},
+					success : function(data){
+						if(data == 1){
+							alert("중복된 아이디입니다.");
+						}else if(data == 0){
+							$("#idChk").attr("value", "Y");
+							alert("사용가능한 아이디입니다.");
+						}
+					}
+			})
+		});
+	})
 </script>
 </html>

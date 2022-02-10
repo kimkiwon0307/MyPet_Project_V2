@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 
 <!-- jquery CDN -->	
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>		
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <!-- 절대경로 -->
  <link href="${path}/resources/css/member/register.css"rel="stylesheet" >
 <!-- 부트스트랩 CDN -->
