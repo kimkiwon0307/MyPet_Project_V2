@@ -1,6 +1,7 @@
 package com.fe.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,21 @@ public class AlbumBoardDAOImpl implements AlbumBoardDAO {
 		return sql.selectOne("albumMapper.read", ano);
 	}
 
-	
+	@Override
+	public void insertFile(Map<String, Object> map) throws Exception {
+		
+		sql.insert("albumMapper.insertFile",map);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectFileList(int ano) throws Exception {
+		return sql.selectList("albumMapper.selectFileList", ano);
+	}
+
+	@Override
+	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
+		return sql.selectOne("albumMapper.selectFileInfo", map);
+	}
 	
 	
 }

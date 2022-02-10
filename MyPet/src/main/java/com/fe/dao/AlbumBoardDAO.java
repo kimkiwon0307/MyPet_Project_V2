@@ -1,6 +1,7 @@
 package com.fe.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fe.vo.AlbumBoardVO;
 
@@ -17,5 +18,9 @@ public interface AlbumBoardDAO {
 	
 	public AlbumBoardVO read(int ano) throws Exception;
 	
+	public void insertFile(Map<String, Object>map) throws Exception;
 	
+	public List<Map<String, Object>> selectFileList(int ano) throws Exception;
+	
+	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
 }

@@ -17,13 +17,21 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <title>MyPet</title>
 </head>
+<style>
+img {
+    margin: 1em 0;
+    display: block;
+    background: rgb(240, 240, 240);
+    border: 1px solid rgb(0,0,0);
+}
+</style>
 <body>
 	<header>
 	</header>
 	<div class="container">
 		<div class="sub_menu">
 			<div class = "subject_h1" >
-				<h1>조 회 </h1>
+				<h1>작 성</h1>
 			</div>
 			<div class = "subject_h5">
 				<h5>홈 > 앨범게시판 > 작성하기</h5>
@@ -31,14 +39,17 @@
 			
 		</div>
 		
-		<form action="/controller/albumboard/write" method="post" >
+		<form action="/controller/albumboard/write" method="post"  enctype="multipart/form-data">
 			<div class="input_group_a">
 				<div class="input-group">
-					<span class="input-group-text">사 진</span>
-  					<textarea class="form-control" aria-label="With textarea"  readonly="readonly"> 
-  						<img src="https://cdn.pixabay.com/photo/2018/05/17/06/22/dog-3407906__480.jpg"/>
-  					</textarea>
+					<span class="input-group-text" id="basic-addon1">사 진</span> 
+  					<img id="image" src="" width="700" alt="로컬에 있는 이미지가 보여지는 영역">
 				</div>
+				
+				<div class="input-group mb-3">
+					<input type="file" id="files" class="form-control" name="file" />
+				</div>
+				
 		
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">내 용</span> 
@@ -64,6 +75,19 @@
 			$("#btn_list").on("click",function(){
 				location.href="/controller/albumboard/list"
 			})
+	
+			// 파일 미리보기
+			document.getElementById("files").onchange = function () {
+			    var reader = new FileReader();
+
+			    reader.onload = function (e) {
+			        // get loaded data and render thumbnail.
+			        document.getElementById("image").src = e.target.result;
+			    };
+
+			    // read the image file as a data URL.
+			    reader.readAsDataURL(this.files[0]);
+			};
 			
 		})
 	

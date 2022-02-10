@@ -31,5 +31,6 @@
     <context:component-scan base-package="com.fe.service"></context:component-scan>
     <context:component-scan base-package="com.fe.dao"></context:component-scan>
     <context:component-scan base-package="com.fe.vo"></context:component-scan>
+    <context:component-scan base-package="com.fe.util"></context:component-scan>
     
 </beans>

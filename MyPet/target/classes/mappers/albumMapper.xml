@@ -5,9 +5,41 @@
 <mapper namespace="albumMapper">
 	
 	
-	<insert id="insert">
-		insert into mp_album(ano, acontent) values(mp_album_seq.nextval, #{acontent})
+	<insert id="insert" parameterType="com.fe.vo.AlbumBoardVO" useGeneratedKeys="true" keyProperty="ano">
+			
+		<selectKey keyProperty="ano" resultType="int" order="BEFORE">
+			select mp_album_seq.nextval from dual
+		</selectKey>	
+		
+		insert into mp_album(ano, acontent) values(#{ano}, #{acontent})
 	</insert>
+	
+	 <insert id="insertFile" parameterType="hashMap">
+		INSERT INTO MP_FILE(
+			FILE_NO,
+			ANO,
+			ORG_FILE_NAME,
+			STORED_FILE_NAME,
+			FILE_SIZE
+		)VALUES(
+			SEQ_MP_FILE_NO.NEXTVAL,
+			#{ANO},
+			#{ORG_FILE_NAME},
+			#{STORED_FILE_NAME},
+			#{FILE_SIZE}
+		)
+    </insert>
+	
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		SELECT FILE_NO,
+			    STORED_FILE_NAME,
+			   ORG_FILE_NAME,
+			   ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+		  FROM MP_FILE
+		 WHERE ano = #{ano}
+		   AND DEL_GB = 'N'
+	</select>
 	
 	<select id="list" resultType="com.fe.vo.AlbumBoardVO">
 		
@@ -37,6 +69,14 @@
 		  FROM mp_album
 		 WHERE ano = #{ano}
 	</delete>
+	
+	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+	SELECT 
+		STORED_FILE_NAME,
+		ORG_FILE_NAME
+	FROM MP_FILE
+	WHERE FILE_NO = #{FILE_NO}
+</select>
 
 
 </mapper>

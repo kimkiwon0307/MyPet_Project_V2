@@ -39,7 +39,7 @@
 				
 				<div class="input-group">
 					<span class="input-group-text">사 진</span>
-  					<textarea class="form-control" aria-label="With textarea"  readonly="readonly"> <img src="https://cdn.pixabay.com/photo/2018/05/17/06/22/dog-3407906__480.jpg"/></textarea>
+					<img id="image" src="" width="700" alt="로컬에 있는 이미지가 보여지는 영역">
 				</div>
 				
 		
@@ -47,7 +47,13 @@
 					<span class="input-group-text" id="basic-addon1">내 용</span> 
 					<input type="text" class="form-control" name="acontent" value="${read.acontent}" readonly="readonly"/>
 				</div>
-
+				<span>파일 목록</span>
+				<div class="form-group" style="border: 1px solid #dbdbdb;">
+					<c:forEach var="file" items="${file}">
+						<a href="#" onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
+					</c:forEach>
+				</div>
+				
 			<div class="btn_group">
 					<button type="button" class="btn btn-primary" id="btn_update">수 정</button>
 					<button type="button" class="btn btn-primary" id="btn_delete">삭 제</button>
@@ -93,7 +99,15 @@
 				}
 			})
 			
+			//사진 조회
+		
+			var fileContent = "${fileImg}"
+			document.getElementById("image").src = "data:image/png;base64," + fileContent; 
+			
 		})
+
+				    
+			    
 	
 	</script>
 
