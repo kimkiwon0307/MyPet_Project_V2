@@ -28,16 +28,19 @@
     <!-- Bootstrap core CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
-    <style>
-   
-    </style>
   </head>
   <body>
 	
-<div class="header"></div>
+<header>
+ <jsp:include page="../top_bottom/header.jsp"></jsp:include>
 
-	<div class="sub_menu">
+</header>
+
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+    		<div class="sub_menu">
 			<div class = "subject_h1" >
 				<h1>앨 범</h1>
 			</div>
@@ -45,9 +48,7 @@
 				<h5>홈 > 앨범게시판 > 목록</h5>
 			</div>
 	</div>
-
-  <div class="album py-5 bg-light">
-    <div class="container">
+    
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
      
@@ -75,7 +76,7 @@
     
       </div>
     </div>
-    	<div class="btn_group">
+    	<div class="btn_group" id="write_btn">
 			<button type="button" class="btn btn-primary" id="btn_write">작 성</button>
 		</div>
     

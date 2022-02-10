@@ -29,6 +29,7 @@
 <main class="form-signin">
   <form name='homeForm' method="post" action="/controller/member/login">
     <img class="mb-4" src="${path}/resources/images/home/logo.png" alt="" width="230" height="170">
+    <c:if test="${member == null}">
     <div class="form-floating">
       <input type="text" class="form-control" name="userId" id="userId" placeholder="name@example.com" required>
       <label for="floatingInput">아이디를 입력해주세요.</label>
@@ -37,9 +38,16 @@
       <input type="password" class="form-control" name="userPass" id="userPass" placeholder="Password" required>
       <label for="floatingPassword">비밀번호를 입력해주세요</label>
     </div>
-    
     <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
     <button class="w-100 btn btn-lg btn-danger" type="button" id="register_btn">회원가입</button>
+    </c:if>
+    
+    	<c:if test="${member != null}">
+        		<p>${member.userId}님 안녕하세요.</p>
+      		<a href="/controller/member/logout">
+        		<button type="button" class="btn btn-outline-primary me-2">Login Out</button>
+       		</a>
+       	</c:if>
     
     <p class="mt-5 mb-3 text-muted">&copy; 2011-2022</p>
     

@@ -20,11 +20,12 @@
 <body>
 	<header>
 	</header>
-	<div class="container">
+	  <div class="album py-5 bg-light">
+		<div class="container">
 		<div class="sub_menu">
-			<div class = "subject_h1" >
-				<h1>회원가입 </h1>
-			</div>
+				<div class = "subject_h1" >
+					<h1>회원가입 </h1>
+				</div>
 			<div class = "subject_h5">
 				<h5>홈 > 회원가입</h5>
 			</div>
@@ -32,9 +33,7 @@
 		</div>
 	
 		<form action="/controller/member/register" method="post">
-			
 			<div class="input_group_a">
-				
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">아이디</span> 
 					<input type="text" class="form-control" placeholder="아이디를 작성하세요." name="userId" required/>
@@ -59,6 +58,7 @@
 			</div>
 	      </form>
 		</div>
+	</div>
 	</body>
 <script>
 		$(document).ready(function(){

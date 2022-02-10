@@ -19,6 +19,7 @@
 </head>
 <body>
 	<header>
+	 <jsp:include page="../top_bottom/header.jsp"></jsp:include>
 	</header>
 	<div class="container">
 		<div class="sub_menu">
@@ -58,27 +59,32 @@
 
 
 			<div class="btn_group">
+				<c:if test="${read.fwriter == member.userId}">
 					<button type="button" class="btn btn-primary" id="btn_update">수 정</button>
 					<button type="button" class="btn btn-primary" id="btn_delete">삭 제</button>
 					<button type="button" class="btn btn-danger" id="btn_list">목 록</button>
-				</div>
+				</c:if>
+				<c:if test="${read.fwriter != member.userId}">
+					<button type="button" class="btn btn-danger" id="btn_list">목 록</button>
+				</c:if>
 			</div>
+		</div>
 			
-			<!-- 댓글 -->
-<div id="reply">
+<!-- 댓글 -->
+<div id="reply" style="margin-top: 10px;">
   <ol class="replyList">
     <c:forEach items="${replyList}" var="replyList">
       <li>
-        <p>
-        작성자 : ${replyList.writer}<br />
-        작성 날짜 :  <fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd" />
-        </p>
-
-        <p>${replyList.content}</p>
-       <div>
-  		<button type="button" class="replyUpdateBtn" data-rno="${replyList.rno}">수정</button>
- 		<button type="button" class="replyDeleteBtn" data-rno="${replyList.rno}">삭제</button>
+      	 <div class="input-group input-group-sm mb-3">
+  	<span class="input-group-text" >${replyList.writer}</span>
+    <input type="text" class="form-control" value="${replyList.content}  <fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd" /> " readonly="readonly" style="background-color: #F5F5F5"/>
+  </div>
+  	<c:if test="${replyList.writer == member.userId}">
+       <div style="margin-bottom: 10px; float: right;">
+  		<button type="button" class="btn-primary" id="replyUpdateBtn" data-rno="${replyList.rno}">수정</button>
+ 		<button type="button" class="btn-danger" id="replyDeleteBtn" data-rno="${replyList.rno}">삭제</button>
 	   </div>
+  	</c:if>
         
       </li>
     </c:forEach>   
@@ -92,13 +98,19 @@
   <input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
   <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
 
-  <div>
-    <label for="writer">댓글 작성자</label><input type="text" id="writer" name="writer" />
-    <br/>
-    <label for="content">댓글 내용</label><input type="text" id="content" name="content" />
+
+
+
+  <div class="input-group input-group-sm mb-3">
+  	<span class="input-group-text">작성자</span>
+    <input type="text" class="form-control" id="writer" name="writer" value="${member.userId}" readonly="readonly" style="background-color: #F5F5F5"/>
   </div>
+ <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text">내 용</span>
+    <input type="text" class="form-control" id="content" name="content" />
+</div>
   <div>
- 	 <button type="button" class="replyWriteBtn">작성</button>
+ 	 <button type="button" class="btn btn-primary" id="replyWriteBtn" style="float:right; margin-top:10px;">작성</button>
   </div>
 </form>
 			
@@ -144,7 +156,7 @@
 				
 			})
 			
-			$(".replyWriteBtn").on("click", function(){
+			$("#replyWriteBtn").on("click", function(){
 				  var formObj = $("form[name='replyForm']");
 				  formObj.attr("action", "/controller/freeboard/replyWrite");
 				  formObj.submit();
@@ -152,7 +164,7 @@
 			
 			
 			//댓글 수정 View
-			$(".replyUpdateBtn").on("click", function(){
+			$("#replyUpdateBtn").on("click", function(){
 				location.href = "/controller/freeboard/replyUpdateView?fno=${read.fno}"
 								+ "&page=${scri.page}"
 								+ "&perPageNum=${scri.perPageNum}"
@@ -162,7 +174,7 @@
 			});
 					
 		//댓글 삭제 View
-			$(".replyDeleteBtn").on("click", function(){
+			$("#replyDeleteBtn").on("click", function(){
 				location.href = "/controller/freeboard/replyDeleteView?fno=${read.fno}"
 					+ "&page=${scri.page}"
 					+ "&perPageNum=${scri.perPageNum}"

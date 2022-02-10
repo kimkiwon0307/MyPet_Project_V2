@@ -67,7 +67,7 @@
 	height : 300px;
 }
 
-.header{
+header{
 	height : 300px;
 }
 
@@ -86,3 +86,7 @@
         }
       }
 
+#write_btn{
+	
+	float:right;
+}

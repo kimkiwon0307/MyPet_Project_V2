@@ -11,7 +11,7 @@
 			var formObj = $("form[name='updateForm']");
 			
 			$(".cancel_btn").on("click", function(){
-				location.href = "controller/freeboard/readView?fno=${replyUpdate.fno}"
+				location.href = "/controller/freeboard/readView?fno=${replyUpdate.fno}"
 					   + "&page=${scri.page}"
 					   + "&perPageNum=${scri.perPageNum}"
 					   + "&searchType=${scri.searchType}"

@@ -21,7 +21,12 @@
 </head>
 <body>
 	<header>
+	
+	 <jsp:include page="../top_bottom/header.jsp"></jsp:include>
+	
+	
 	</header>
+  <div class="album py-5 bg-light">	
 	<div class="container">
 		<div class="sub_menu">
 			<div class = "subject_h1" >
@@ -30,17 +35,6 @@
 			<div class = "subject_h5">
 				<h5>홈 > 자유게시판 > 목록</h5>
 			</div>
-			
-	<li>
-		<c:if test="${member != null}"><a href="/member/logout">로그아웃</a></c:if>
-		<c:if test="${member == null}"><a href="/">로그인</a></c:if>
-	</li>
-	<li>
-		<c:if test="${member != null}">
-			<p>${member.userId}님 안녕하세요.</p>
-		</c:if>
-	</li>
-			
 		</div>
 
 		<table class="table">
@@ -125,7 +119,7 @@
 
 	  </div>
 	</div>
-
+</div>
 	<div class="bottom">
 	</div>
 

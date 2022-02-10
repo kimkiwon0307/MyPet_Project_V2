@@ -31,7 +31,6 @@ public class MemberController {
 	@PostMapping("/register")
 	public String postRegister(MemberVO vo) throws Exception {
 		
-		System.out.println(vo.toString());
 		service.register(vo);
 		
 		return "redirect:/";
@@ -41,14 +40,10 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception{
 		
-		System.out.println(vo.toString());
 		
 		HttpSession session = req.getSession();
 	
 		MemberVO login = service.login(vo);
-		
-		System.out.println(session.toString());
-		
 		
 		if(login == null) {
 			session.setAttribute("member", null);
@@ -57,7 +52,7 @@ public class MemberController {
 			session.setAttribute("member", login);
 		}
 		
-		return "redirect:/";
+		return "redirect:/freeboard/list";
 	}
 	
 	@GetMapping("/logout")
@@ -70,6 +65,8 @@ public class MemberController {
 	
 	@GetMapping("/memberUpdateView")
 	public String registerUpdateView() throws Exception{
+		
+		System.out.println("hihihihi");
 		
 		return "member/memberUpdateView";
 	}
@@ -86,13 +83,13 @@ public class MemberController {
 	
 	
 	// 회원 탈퇴 get
-		@RequestMapping(value="/memberDeleteView", method = RequestMethod.GET)
+		@GetMapping("/memberDeleteView")
 		public String memberDeleteView() throws Exception{
 			return "member/memberDeleteView";
 		}
 		
 		// 회원 탈퇴 post
-		@RequestMapping(value="/memberDelete", method = RequestMethod.POST)
+		@PostMapping("/memberDelete")
 		public String memberDelete(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 			
 			// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
@@ -106,8 +103,12 @@ public class MemberController {
 				rttr.addFlashAttribute("msg", false);
 				return "redirect:/member/memberDeleteView";
 			}
+			
+			System.out.println("비번맞음");
 			service.memberDelete(vo);
+			System.out.println("비번맞음2");
 			session.invalidate();
+			System.out.println("비번맞음3");
 			return "redirect:/";
 		}
 }

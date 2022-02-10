@@ -36,7 +36,8 @@
 			<div class="input_group_a">
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">이 름</span> 
-					<input type="text" class="form-control" placeholder="Username" name="fwriter" required/>
+					<input type="text" class="form-control" placeholder="Username" name="fwriter" 
+					 value="${member.userId}"  readonly="readonly"/>
 				</div>
 			
 				<div class="input-group mb-3">
