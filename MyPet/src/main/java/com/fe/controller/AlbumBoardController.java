@@ -2,6 +2,7 @@ package com.fe.controller;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
@@ -46,8 +47,31 @@ public class AlbumBoardController {
 	@GetMapping("/list")
 	public String list(Model model) throws Exception{
 
+		byte[] fileByte = null;
+		
+		List<String> supplierNames1 = new ArrayList<String>();
+		
+		
 		model.addAttribute("list", service.list());
+	   
+		for(int i=0; i<service.list().size() ; i++) {
+			
+		List<Map<String,Object>> fileList = service.selectFileList(service.list().get(i).getAno());
+		
+		String storedFileName = fileList.get(0).get("STORED_FILE_NAME").toString();
+		
+		 fileByte = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\mp\\file\\"+ storedFileName));
 	
+		String fileImg = new String(Base64.getEncoder().encode(fileByte));
+		 
+		supplierNames1.add(fileImg);
+		 
+		}
+
+	
+		model.addAttribute("fileImag",supplierNames1);
+		
+		
 		return "albumboard/list";
 		
 	}
@@ -58,14 +82,29 @@ public class AlbumBoardController {
 		
 		model.addAttribute("update", service.read(vo.getAno()));
 		
+		List<Map<String,Object>> fileList = service.selectFileList(vo.getAno());
+
+		// 사진 조회
+		
+		// 저장된 사진 이름 가져오기
+		String storedFileName = fileList.get(0).get("STORED_FILE_NAME").toString();
+		// 사진 -> 바이트파일
+		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\mp\\file\\"+ storedFileName));
+	    // 이미지 바이트 파일 -> 인코더
+		String fileImg = new String(Base64.getEncoder().encode(fileByte));
+
+	    model.addAttribute("fileImg",fileImg);
+		model.addAttribute("read", service.read(vo.getAno()));
+		model.addAttribute("file",fileList);	
+		
+		
+		
 		return "albumboard/updateView";
 	}
 	
 	// 게시판 수정
 	@PostMapping("/update")
 	public String update(AlbumBoardVO vo) throws Exception{
-		
-		System.out.println(vo.toString()+"hi");
 		
 		service.update(vo);
 		
@@ -75,9 +114,7 @@ public class AlbumBoardController {
 	// 게시판 삭제
 	@PostMapping("/delete")
 	public String delete(AlbumBoardVO vo) throws Exception{
-		
 		service.delete(vo.getAno());
-		
 		return "redirect:/albumboard/list";
 	}
 	
@@ -89,9 +126,9 @@ public class AlbumBoardController {
 		// 사진 조회
 		
 		// 저장된 사진 이름 가져오기
-		String date = fileList.get(0).get("STORED_FILE_NAME").toString();
+		String storedFileName = fileList.get(0).get("STORED_FILE_NAME").toString();
 		// 사진 -> 바이트파일
-		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\mp\\file\\"+ date));
+		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\mp\\file\\"+ storedFileName));
 	    // 이미지 바이트 파일 -> 인코더
 		String fileImg = new String(Base64.getEncoder().encode(fileByte));
 
@@ -105,6 +142,7 @@ public class AlbumBoardController {
 	
 	@RequestMapping(value="/fileDown")
 	public void fileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
+		
 		Map<String, Object> resultMap = service.selectFileInfo(map);
 		String storedFileName = (String) resultMap.get("STORED_FILE_NAME");
 		String originalFileName = (String) resultMap.get("ORG_FILE_NAME");

@@ -19,6 +19,7 @@
 </head>
 <body>
 	<header>
+	 <jsp:include page="../top_bottom/header.jsp"></jsp:include>
 	</header>
 	<div class="container">
 		<div class="sub_menu">
@@ -37,11 +38,9 @@
 			
 				<div class="input-group">
 					<span class="input-group-text">사 진</span>
-  					<textarea class="form-control" aria-label="With textarea"  readonly="readonly"> 
-  						<img src="https://cdn.pixabay.com/photo/2018/05/17/06/22/dog-3407906__480.jpg"/>
-  					</textarea>
+					<img id="image" src="" width="700" alt="로컬에 있는 이미지가 보여지는 영역">
 				</div>
-		
+				
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">내 용</span> 
 					<input type="text" class="form-control" name="acontent" value='<c:out value="${update.acontent}"></c:out>'/>
@@ -64,6 +63,12 @@
 			$("#btn_list").on("click",function(){
 				location.href="/controller/albumboard/list"
 			})
+			
+			
+			//사진 조회
+			var fileContent = "${fileImg}"
+			document.getElementById("image").src = "data:image/png;base64," + fileContent;  
+			
 		})
 	
 	</script>

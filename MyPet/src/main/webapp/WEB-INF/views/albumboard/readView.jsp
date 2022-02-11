@@ -19,7 +19,9 @@
 </head>
 <body>
 	<header>
+	 <jsp:include page="../top_bottom/header.jsp"></jsp:include>
 	</header>
+	
 	<div class="container">
 		<div class="sub_menu">
 			<div class = "subject_h1" >
@@ -47,12 +49,7 @@
 					<span class="input-group-text" id="basic-addon1">내 용</span> 
 					<input type="text" class="form-control" name="acontent" value="${read.acontent}" readonly="readonly"/>
 				</div>
-				<span>파일 목록</span>
-				<div class="form-group" style="border: 1px solid #dbdbdb;">
-					<c:forEach var="file" items="${file}">
-						<a href="#" onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
-					</c:forEach>
-				</div>
+				
 				
 			<div class="btn_group">
 					<button type="button" class="btn btn-primary" id="btn_update">수 정</button>
@@ -100,9 +97,9 @@
 			})
 			
 			//사진 조회
-		
+		 
 			var fileContent = "${fileImg}"
-			document.getElementById("image").src = "data:image/png;base64," + fileContent; 
+			document.getElementById("image").src = "data:image/png;base64," + fileContent;  
 			
 		})
 

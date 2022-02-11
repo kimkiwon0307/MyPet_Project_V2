@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!doctype html>
 <html lang="en">
@@ -52,13 +53,12 @@
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
      
-     <c:forEach items="${list}" var="list">
+     <c:forEach items="${list}" var="list" varStatus="status">
         <div class="col">
-          <div class="card shadow-sm">
-          	
-     
-          <img src="https://cdn.pixabay.com/photo/2018/05/17/06/22/dog-3407906__480.jpg"/>
-          	          
+          <div class="card shadow-sm">	
+		 <!-- 이거하느라 몇시간 걸린지 모르겠다. 어렵다.. -->	 
+		<img src="data:image/png;base64,${fileImag.get(status.index)}" style="width: 420px; height: 420px;"> 
+			    		
             <div class="card-body">
             
               <a href="/controller/albumboard/readView?ano=${list.ano}">
@@ -73,12 +73,12 @@
           </div>
         </div>
      </c:forEach>
-    
+
       </div>
-    </div>
     	<div class="btn_group" id="write_btn">
 			<button type="button" class="btn btn-primary" id="btn_write">작 성</button>
 		</div>
+    </div>
     
   </div>
       
@@ -93,7 +93,12 @@
 		$("#btn_write").on("click",function(){
 			location.href="/controller/albumboard/writeView";
 		})
+		
+		// model값으로 넘어온거 크기
+		var j = "${fn:length(fileImag)}";
+
 	})
+	
 	</script>
       
       
