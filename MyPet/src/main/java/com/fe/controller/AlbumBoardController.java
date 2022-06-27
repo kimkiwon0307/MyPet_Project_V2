@@ -25,6 +25,7 @@ import com.fe.vo.AlbumBoardVO;
 @RequestMapping("/albumboard/*")
 public class AlbumBoardController {
 	
+	// 의존객체
 	@Autowired
 	AlbumBoardService service;
 	
@@ -44,6 +45,7 @@ public class AlbumBoardController {
 		return "redirect:/albumboard/list";
 	}
 	
+	// 앨범 리스트
 	@GetMapping("/list")
 	public String list(Model model) throws Exception{
 
@@ -51,23 +53,21 @@ public class AlbumBoardController {
 		
 		List<String> supplierNames1 = new ArrayList<String>();
 		
-		
 		model.addAttribute("list", service.list());
 	   
-		for(int i=0; i<service.list().size() ; i++) {
+		for(int i=0; i<service.list().size(); i++) {
 			
 		List<Map<String,Object>> fileList = service.selectFileList(service.list().get(i).getAno());
 		
 		String storedFileName = fileList.get(0).get("STORED_FILE_NAME").toString();
 		
-		 fileByte = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\mp\\file\\"+ storedFileName));
+		fileByte = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\mp\\file\\"+ storedFileName));
 	
 		String fileImg = new String(Base64.getEncoder().encode(fileByte));
 		 
 		supplierNames1.add(fileImg);
 		 
 		}
-
 	
 		model.addAttribute("fileImag",supplierNames1);
 		
@@ -84,20 +84,20 @@ public class AlbumBoardController {
 		
 		List<Map<String,Object>> fileList = service.selectFileList(vo.getAno());
 
-		// 사진 조회
+		// 수정 조회
 		
 		// 저장된 사진 이름 가져오기
 		String storedFileName = fileList.get(0).get("STORED_FILE_NAME").toString();
+		
 		// 사진 -> 바이트파일
 		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\mp\\file\\"+ storedFileName));
-	    // 이미지 바이트 파일 -> 인코더
+
+		// 이미지 바이트 파일 -> 인코더
 		String fileImg = new String(Base64.getEncoder().encode(fileByte));
 
 	    model.addAttribute("fileImg",fileImg);
 		model.addAttribute("read", service.read(vo.getAno()));
 		model.addAttribute("file",fileList);	
-		
-		
 		
 		return "albumboard/updateView";
 	}
@@ -123,7 +123,7 @@ public class AlbumBoardController {
 
 		List<Map<String,Object>> fileList = service.selectFileList(vo.getAno());
 
-		// 사진 조회
+		// 조회
 		
 		// 저장된 사진 이름 가져오기
 		String storedFileName = fileList.get(0).get("STORED_FILE_NAME").toString();

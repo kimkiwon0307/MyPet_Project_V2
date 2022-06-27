@@ -37,8 +37,6 @@
 
 </header>
 
-
-
   <div class="album py-5 bg-light">
     <div class="container">
     		<div class="sub_menu">
@@ -49,18 +47,17 @@
 				<h5>홈 > 앨범게시판 > 목록</h5>
 			</div>
 	</div>
-    
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
      
      <c:forEach items="${list}" var="list" varStatus="status">
         <div class="col">
           <div class="card shadow-sm">	
+		
 		 <!-- 이거하느라 몇시간 걸린지 모르겠다. 어렵다.. -->	 
-		<img src="data:image/png;base64,${fileImag.get(status.index)}" style="width: 420px; height: 420px;"> 
+			<img src="data:image/png;base64,${fileImag.get(status.index)}" style="width: 420px; height: 420px;"> 
 			    		
             <div class="card-body">
-            
               <a href="/controller/albumboard/readView?ano=${list.ano}">
              	 <p class="card-text"><c:out value="${list.acontent}"/></p>
               </a>	
@@ -83,7 +80,6 @@
   </div>
       
       <footer>
-      
       </footer>
       <script>
 	
@@ -93,10 +89,8 @@
 		$("#btn_write").on("click",function(){
 			location.href="/controller/albumboard/writeView";
 		})
-		
 		// model값으로 넘어온거 크기
 		var j = "${fn:length(fileImag)}";
-
 	})
 	
 	</script>

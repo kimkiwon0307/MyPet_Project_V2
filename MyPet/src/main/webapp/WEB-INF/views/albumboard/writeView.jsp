@@ -70,15 +70,15 @@ img {
 	<script>
 		$(document).ready(function(){
 			
-			
 			// 목록 버튼 누르면 목록으로 가기
 			$("#btn_list").on("click",function(){
 				location.href="/controller/albumboard/list"
 			})
 	
-			// 파일 미리보기
+			// 사진 미리보기
 			document.getElementById("files").onchange = function () {
-			    var reader = new FileReader();
+			    
+				var reader = new FileReader();
 
 			    reader.onload = function (e) {
 			        // get loaded data and render thumbnail.
@@ -92,6 +92,5 @@ img {
 		})
 	
 	</script>
-
 </body>
 </html>
